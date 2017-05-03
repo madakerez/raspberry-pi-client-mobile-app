@@ -3,11 +3,16 @@ import { HttpApi } from '../http-api.service';
 
 @Injectable()
   export class UserRepo {
-    constructor(private httpApi: HttpApi) {
+    constructor(private httpApi: HttpApi) {}
 
+    login(name: string, password: string) {
+      let data = {
+        name: name,
+        password: password
+      }
+      return this.httpApi.post(`user/login`, data);
     }
-
-    login({login, id}) {
-      console.log(login, id)
+    logout() {
+      return this.httpApi.get(`user/login`);
     }
   }

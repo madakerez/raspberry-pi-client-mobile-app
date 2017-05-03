@@ -7,29 +7,25 @@ export class HttpApi {
   authToken;
   root = 'root';
 
-  constructor(private http: Http) {
-
-  }
+  constructor(private http: Http) { }
 
   public get(path, params?, options?, headers?) {
-   let requestOptions = new RequestOptions({
-     method: RequestMethod.Get,
-     url: this.buildUrl(path),
-     search: this.createSearchParams(params)
-   });
-   let request = new Request(requestOptions);
-
-   return this.sendRequest(request);
+    let requestOptions = new RequestOptions({
+      method: RequestMethod.Get,
+      url: this.buildUrl(path),
+      search: this.createSearchParams(params)
+    });
+    let request = new Request(requestOptions);
+    return this.sendRequest(request);
  }
 
- public post(path, params?, body?, options?) {
+ public post(path, body?, options?) {
     let requestOptions = new RequestOptions({
       method: RequestMethod.Post,
       url: this.buildUrl(path),
       body: body
     });
     let request = new Request(requestOptions);
-
     return this.sendRequest(request);
   }
 
@@ -44,7 +40,6 @@ export class HttpApi {
     if (this.authToken) {
       search.set('token', this.authToken);
     }
-
     return search;
   }
 

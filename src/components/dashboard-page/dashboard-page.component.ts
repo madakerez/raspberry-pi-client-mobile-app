@@ -15,13 +15,13 @@ export class DashboardPageComponent {
     private httpApi: HttpApi,
     private appRepo: AppRepo
   ) {
-    this.appRepo.pinsRepo.getPinState({pinId: 22});
-    // let request = this.httpApi.get('onet.pl');
-    // request.subscribe((res) => {
-    //   console.log(res)
-    // }, (err) => {
-    //   console.log(err)
-    // });
+
+    let request = this.appRepo.pinsRepo.getPinState(22);
+    request.subscribe((res) => {
+      console.log(res)
+    }, (err) => {
+      console.log(err)
+    });
   }
 
 }
