@@ -51,6 +51,7 @@ export class HttpApi {
   private sendRequest(request) {
     return this.http.request(request)
       .map((response) => {
+        //TODO add prase response middleware
         return response
       })
       .catch((error) => {
