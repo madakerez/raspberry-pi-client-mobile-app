@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { HttpApi } from '../../services/http-api.service';
 import { AppRepo } from '../../services/app-repo.service';
+import { StorageService } from '../../services/storage.service';
+
 
 @Component({
   selector: 'rpi-dashboard',
@@ -13,15 +15,10 @@ export class DashboardPageComponent {
   constructor(
     public navCtrl: NavController,
     private httpApi: HttpApi,
-    private appRepo: AppRepo
+    private appRepo: AppRepo,
+    private storageService: StorageService
   ) {
 
-    let request = this.appRepo.pinsRepo.getPinState(22);
-    request.subscribe((res) => {
-      console.log(res)
-    }, (err) => {
-      console.log(err)
-    });
   }
 
 }

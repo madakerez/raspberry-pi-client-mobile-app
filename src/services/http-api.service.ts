@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class HttpApi {
   authToken;
-  root = 'root';
+  root = 'localhost:3000';
 
   constructor(private http: Http) { }
 

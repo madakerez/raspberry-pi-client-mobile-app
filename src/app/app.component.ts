@@ -9,6 +9,9 @@ import { LoginPageComponent } from '../components/login-page/login-page.componen
 import { CreatorPageComponent } from '../components/creator-page/creator-page.component';
 import { SettingsPageComponent } from '../components/settings-page/settings-page.component';
 
+import { Auth } from '../services/auth.service';
+import { Storage } from '@ionic/storage';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -27,12 +30,19 @@ export class RaspberryPiMobileApp {
     public platform: Platform,
     public statusBar: StatusBar,
     public splashScreen: SplashScreen,
-    public menu: MenuController
+    public menu: MenuController,
+    private auth: Auth,
+    private storage: Storage
   ) {
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
-      this.setRootPage();
+      this.storage.ready().then(() => {
+        let isAuthorized$ = this.auth.isAuthorized();
+        isAuthorized$.skip(1).subscribe((value) => {
+          this.setRootPage(value);
+        });
+      });
     });
   }
 
@@ -40,8 +50,8 @@ export class RaspberryPiMobileApp {
     this.rootPage = page;
   }
 
-  setRootPage() {
-    if (!this.userAuthorized) {
+  setRootPage(isAuthorized) {
+    if (!isAuthorized) {
       this.rootPage = LoginPageComponent;
       this.menu.enable(false);
     } else {
