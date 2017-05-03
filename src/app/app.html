@@ -1,0 +1,25 @@
+<ion-menu *ngIf="userAuthorized" [content]="nav">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="pushPage(dashboardPageRef)" menuToggle>
+        <ion-icon name="home"></ion-icon> Dashboard
+      </button>
+      <button ion-item (click)="pushPage(creatorPageRef)" menuToggle>
+        <ion-icon name="create"></ion-icon> Creator
+      </button>
+      <button ion-item (click)="pushPage(settingsPageRef)" menuToggle>
+        <ion-icon name="settings"></ion-icon> Settings
+      </button>
+      <button ion-item (click)="logout()" menuToggle>
+        <ion-icon name="log-out"></ion-icon> Logout
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #nav [root]="rootPage"></ion-nav>
